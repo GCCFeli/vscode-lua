@@ -1,21 +1,34 @@
 {
-	"name": "language-client-example",
-	"description": "VSCode part of a language server",
-	"author": "Microsoft Corporation",
-	"license": "MIT",
-	"version": "0.0.1",
-	"publisher": "vscode",
-	"engines": {
-		"vscode": "^0.10.10"
-	},
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [
-		"onLanguage:plaintext"
-	],
-	"main": "./out/src/extension",
-	"contributes": {
+    "name": "vscode-lua",
+    "displayName": "Lua",
+    "description": "Lua language support for VS Code",
+    "version": "0.0.1",
+    "publisher": "gccfeli",
+    "license": "SEE LICENSE IN LICENSE or README.MD",
+    "homepage": "https://github.com/gccfeli/vscode-lua/blob/master/README.md",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/gccfeli/vscode-lua"
+    },
+    "bugs": {
+        "url": "https://github.com/gccfeli/vscode-lua/issues"
+    },
+    "icon": "images/icon.svg",
+    "galleryBanner": {
+        "color": "#1e415e",
+        "theme": "dark"
+    },
+    "engines": {
+        "vscode": "^0.10.10"
+    },
+    "categories": [
+        "Languages"
+    ],
+    "activationEvents": [
+        "onLanguage:lua"
+    ],
+    "main": "./out/src/extension",
+ 	"contributes": {
 		"configuration": {
 			"type": "object",
 			"title": "Example configuration",
@@ -28,17 +41,16 @@
 			}
 		}
 	},	
-	"scripts": {
-		"vscode:prepublish": "node ./node_modules/vscode/bin/compile",
-		"compile": "node ./node_modules/vscode/bin/compile -watch -p ./",
-		"postinstall": "node ./node_modules/vscode/bin/install"
-
-	},
+    "scripts": {
+        "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
+        "compile": "node ./node_modules/vscode/bin/compile -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install"
+    },
+    "dependencies": {
+        "vscode-languageclient": "^1.4.2"
+    },
 	"devDependencies": {
 		"typescript": "^1.8.9",
 		"vscode": "^0.11.0"
-	},
-	"dependencies": {
-		"vscode-languageclient": "^1.4.2"
 	}
 }

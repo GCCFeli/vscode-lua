@@ -1,8 +1,8 @@
 {
-	"name": "langauge-server-example",
-	"description": "Example implementation of a language server in node.",
+	"name": "vscode-lua-server",
+	"description": "Lua language support for VS Code (Server)",
 	"version": "0.0.1",
-	"author": "Microsoft Corporation",
+	"author": "gccfeli",
 	"license": "MIT",
 	"engines": {
 		"node": "*"
