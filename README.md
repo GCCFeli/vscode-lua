@@ -2,12 +2,12 @@
 Lua language support for Visual Studio Code.
 
 ##[Wiki](https://github.com/gccfeli/vscode-lua/wiki)
-Once installed, do remember to [configure the path](https://github.com/DonJayamanne/pythonVSCode/wiki/Python-Path-and-Version) to the python executable.
+Once installed, do remember to [configure the path](https://github.com/gccfeli/vscode-lua/wiki/Lua-Path-and-Version) to the lua executable.
 
 ##Features
 * Code formatting (experiment)
 
-##[Issues and Feature Requests](https://github.com/DonJayamanne/pythonVSCode/issues)
+##[Issues and Feature Requests](https://github.com/gccfeli/vscode-lua/issues)
 
 ## Requirements
 * Python is installed on the current system
