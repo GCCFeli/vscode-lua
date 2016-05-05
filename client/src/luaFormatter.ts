@@ -12,14 +12,13 @@ export class LuaFormatter {
         this.outputChannel = outputChannel;
     }
     public formatDocument(extensionDir: string, document: vscode.TextDocument, options: vscode.FormattingOptions, token: vscode.CancellationToken): Thenable<vscode.TextEdit[]> {
-        var luaExePath = path.join(extensionDir, "lua", "bin", "lua5.1.exe");
-        var luaFormatterPath = path.join(extensionDir, "lua", "luaformatter.lua");
-        var fileDir = path.dirname(document.uri.fsPath);
-        return this.provideDocumentFormattingEdits(document, options, token, `${luaExePath} ${luaFormatterPath} -s 4 "${document.uri.fsPath}"`);
+        var luaDir = path.join(extensionDir, "lua");
+        var luaExePath = path.join(luaDir, "bin", "lua5.1.exe");
+        var luaFormatterPath = path.join(luaDir, "luaformatter.lua");
+        return this.provideDocumentFormattingEdits(document, options, token, luaDir, `"${luaExePath}" "${luaFormatterPath}" -s 4 "${document.uri.fsPath}"`);
     }
 
-    protected provideDocumentFormattingEdits(document: vscode.TextDocument, options: vscode.FormattingOptions, token: vscode.CancellationToken, cmdLine: string): Thenable<vscode.TextEdit[]> {
-        var fileDir = path.dirname(document.uri.fsPath);
+    protected provideDocumentFormattingEdits(document: vscode.TextDocument, options: vscode.FormattingOptions, token: vscode.CancellationToken, cwd:string, cmdLine: string): Thenable<vscode.TextEdit[]> {
         return new Promise<vscode.TextEdit[]>((resolve, reject) => {
             //Todo: Save the contents of the file to a temporary file and format that instead saving the actual file
             //This could unnecessarily trigger other behaviours
@@ -32,7 +31,7 @@ export class LuaFormatter {
 
                 this.outputChannel.clear();
 
-                sendCommand(cmdLine, fileDir).then(data=> {
+                sendCommand(cmdLine, cwd).then(data=> {
                     var formattedText = data;
                     if (document.getText() === formattedText) {
                         return resolve([]);
@@ -43,7 +42,7 @@ export class LuaFormatter {
                     resolve([txtEdit]);
 
                 }, errorMsg => {
-                    vscode.window.showErrorMessage(`There was an error in formatting the document. View the Python output window for details.`);
+                    vscode.window.showErrorMessage(`There was an error in formatting the document. View the Lua output window for details.`);
                     this.outputChannel.appendLine(errorMsg);
                     return resolve([]);
                 });
