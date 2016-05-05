@@ -15,6 +15,6 @@ export class LuaFormattingEditProvider implements vscode.DocumentFormattingEditP
 
     public provideDocumentFormattingEdits(document: vscode.TextDocument, options: vscode.FormattingOptions, token: vscode.CancellationToken): Thenable<vscode.TextEdit[]> {
         var fileDir = path.dirname(document.uri.fsPath);
-        return this.formatter.formatDocument(document, options, token);
+        return this.formatter.formatDocument(this.rootDir, document, options, token);
     }
 }

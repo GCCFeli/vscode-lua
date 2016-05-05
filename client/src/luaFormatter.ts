@@ -11,10 +11,11 @@ export class LuaFormatter {
     constructor(outputChannel: vscode.OutputChannel) {
         this.outputChannel = outputChannel;
     }
-    public formatDocument(document: vscode.TextDocument, options: vscode.FormattingOptions, token: vscode.CancellationToken): Thenable<vscode.TextEdit[]> {
-        var luaFormatterPath = 'C:/Users/feli/AppData/Roaming/LuaRocks/bin/luaformatter.bat';
+    public formatDocument(extensionDir: string, document: vscode.TextDocument, options: vscode.FormattingOptions, token: vscode.CancellationToken): Thenable<vscode.TextEdit[]> {
+        var luaExePath = path.join(extensionDir, "lua", "bin", "lua5.1.exe");
+        var luaFormatterPath = path.join(extensionDir, "lua", "luaformatter.lua");
         var fileDir = path.dirname(document.uri.fsPath);
-        return this.provideDocumentFormattingEdits(document, options, token, `${luaFormatterPath} -s 4 "${document.uri.fsPath}"`);
+        return this.provideDocumentFormattingEdits(document, options, token, `${luaExePath} ${luaFormatterPath} -s 4 "${document.uri.fsPath}"`);
     }
 
     protected provideDocumentFormattingEdits(document: vscode.TextDocument, options: vscode.FormattingOptions, token: vscode.CancellationToken, cmdLine: string): Thenable<vscode.TextEdit[]> {
