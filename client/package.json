@@ -13,11 +13,7 @@
     "bugs": {
         "url": "https://github.com/gccfeli/vscode-lua/issues"
     },
-    "icon": "images/icon.svg",
-    "galleryBanner": {
-        "color": "#1e415e",
-        "theme": "dark"
-    },
+    "icon": "images/lua.gif",
     "engines": {
         "vscode": "^0.10.10"
     },
