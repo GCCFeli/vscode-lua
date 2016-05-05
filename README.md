@@ -8,8 +8,8 @@ Only Windows is supported now. Linux/OSX support is coming soon.
 * Code formatting (experiment)
 
 #Planned Features
-* Lint
-*
+* Auto-completion for functions, keywords, and custom APIs
+* Debug
 
 #Platform Support
 * Windows
