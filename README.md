@@ -1,28 +1,31 @@
-# Lua
-Lua language support for Visual Studio Code.
+# Lua for Visual Studio Code
+This is the preview release for Lua support in Visual Studio Code. For now, only code formatting is supported.
 
-##[Wiki](https://github.com/gccfeli/vscode-lua/wiki)
-Once installed, do remember to [configure the path](https://github.com/gccfeli/vscode-lua/wiki/Lua-Path-and-Version) to the lua executable.
+If you run into any issues, please file a bug on [GitHub](https://github.com/gccfeli/vscode-lua/issues).
+Only Windows is supported now. Linux/OSX support is coming soon. 
 
-##Features
+#Features
 * Code formatting (experiment)
 
-##[Issues and Feature Requests](https://github.com/gccfeli/vscode-lua/issues)
+#Planned Features
+* Lint
+*
 
-## Requirements
-* Python is installed on the current system
- + Path to python can be configured
+#Platform Support
+* Windows
+* Linux (coming soon)
+* OS X (coming soon)
 
-## Change Log
+# Change Log
 
-### Version 0.0.1
+## Version 0.0.1
 * Experiment support for Lua code formatting
 
-## Source
-
-[Github](https://github.com/gccfeli/vscode-lua)
-
+# Source
+You can find the source on [Github](https://github.com/gccfeli/vscode-lua).
                 
-## License
-
+# License
 [MIT](https://raw.githubusercontent.com/GCCFeli/vscode-lua/master/LICENSE)
+
+# Contact Author
+Please mail to feli#gccfeli.cn
