@@ -32,18 +32,18 @@ connection.onInitialize((params): InitializeResult => {
 			// Tell the client that the server works in FULL text document sync mode
 			textDocumentSync: documents.syncKind,
 			// Tell the client that the server support code complete
-			completionProvider: {
-				resolveProvider: true
-			}
+			// completionProvider: {
+			// 	resolveProvider: true
+			// }
 		}
 	}
 });
 
 // The content of a text document has changed. This event is emitted
 // when the text document first opened or when its content has changed.
-documents.onDidChangeContent((change) => {
-	validateTextDocument(change.document);
-});
+// documents.onDidChangeContent((change) => {
+// 	validateTextDocument(change.document);
+// });
 
 // The settings interface describe the server relevant settings part
 interface Settings {
@@ -64,32 +64,32 @@ connection.onDidChangeConfiguration((change) => {
 	let settings = <Settings>change.settings;
 	maxNumberOfProblems = settings.languageServerExample.maxNumberOfProblems || 100;
 	// Revalidate any open text documents
-	documents.all().forEach(validateTextDocument);
+	//documents.all().forEach(validateTextDocument);
 });
 
-function validateTextDocument(textDocument: ITextDocument): void {
-	let diagnostics: Diagnostic[] = [];
-	let lines = textDocument.getText().split(/\r?\n/g);
-	let problems = 0;
-	for (var i = 0; i < lines.length && problems < maxNumberOfProblems; i++) {
-		let line = lines[i];
-		let index = line.indexOf('typescript');
-		if (index >= 0) {
-			problems++;
-			diagnostics.push({
-				severity: DiagnosticSeverity.Warning,
-				range: {
-					start: { line: i, character: index},
-					end: { line: i, character: index + 10 }
-				},
-				message: `${line.substr(index, 10)} should be spelled TypeScript`,
-				source: 'ex'
-			});
-		}
-	}
-	// Send the computed diagnostics to VSCode.
-	connection.sendDiagnostics({ uri: textDocument.uri, diagnostics });
-}
+// function validateTextDocument(textDocument: ITextDocument): void {
+// 	let diagnostics: Diagnostic[] = [];
+// 	let lines = textDocument.getText().split(/\r?\n/g);
+// 	let problems = 0;
+// 	for (var i = 0; i < lines.length && problems < maxNumberOfProblems; i++) {
+// 		let line = lines[i];
+// 		let index = line.indexOf('typescript');
+// 		if (index >= 0) {
+// 			problems++;
+// 			diagnostics.push({
+// 				severity: DiagnosticSeverity.Warning,
+// 				range: {
+// 					start: { line: i, character: index},
+// 					end: { line: i, character: index + 10 }
+// 				},
+// 				message: `${line.substr(index, 10)} should be spelled TypeScript`,
+// 				source: 'ex'
+// 			});
+// 		}
+// 	}
+// 	// Send the computed diagnostics to VSCode.
+// 	connection.sendDiagnostics({ uri: textDocument.uri, diagnostics });
+// }
 
 connection.onDidChangeWatchedFiles((change) => {
 	// Monitored files have change in VSCode
@@ -98,36 +98,36 @@ connection.onDidChangeWatchedFiles((change) => {
 
 
 // This handler provides the initial list of the completion items.
-connection.onCompletion((textDocumentPosition: TextDocumentIdentifier): CompletionItem[] => {
-	// The pass parameter contains the position of the text document in 
-	// which code complete got requested. For the example we ignore this
-	// info and always provide the same completion items.
-	return [
-		{
-			label: 'TypeScript',
-			kind: CompletionItemKind.Text,
-			data: 1
-		},
-		{
-			label: 'JavaScript',
-			kind: CompletionItemKind.Text,
-			data: 2
-		}
-	]
-});
+// connection.onCompletion((textDocumentPosition: TextDocumentIdentifier): CompletionItem[] => {
+// 	// The pass parameter contains the position of the text document in 
+// 	// which code complete got requested. For the example we ignore this
+// 	// info and always provide the same completion items.
+// 	return [
+// 		{
+// 			label: 'TypeScript',
+// 			kind: CompletionItemKind.Text,
+// 			data: 1
+// 		},
+// 		{
+// 			label: 'JavaScript',
+// 			kind: CompletionItemKind.Text,
+// 			data: 2
+// 		}
+// 	]
+// });
 
 // This handler resolve additional information for the item selected in
 // the completion list.
-connection.onCompletionResolve((item: CompletionItem): CompletionItem => {
-	if (item.data === 1) {
-		item.detail = 'TypeScript details',
-		item.documentation = 'TypeScript documentation'
-	} else if (item.data === 2) {
-		item.detail = 'JavaScript details',
-		item.documentation = 'JavaScript documentation'
-	}
-	return item;
-});
+// connection.onCompletionResolve((item: CompletionItem): CompletionItem => {
+// 	if (item.data === 1) {
+// 		item.detail = 'TypeScript details',
+// 		item.documentation = 'TypeScript documentation'
+// 	} else if (item.data === 2) {
+// 		item.detail = 'JavaScript details',
+// 		item.documentation = 'JavaScript documentation'
+// 	}
+// 	return item;
+// });
 
 /*
 connection.onDidOpenTextDocument((params) => {

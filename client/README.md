@@ -18,6 +18,9 @@ Only Windows is supported now. Linux/OSX support is coming soon.
 
 # Change Log
 
+## Version 0.0.4
+* Bug fix: default auto complete is missing
+
 ## Version 0.0.1
 * Experiment support for Lua code formatting
 
