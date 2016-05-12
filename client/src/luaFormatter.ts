@@ -5,6 +5,10 @@ import * as path from 'path';
 import * as fs from 'fs';
 import {sendCommand} from './childProc';
 
+interface FormattedCode {
+    Text: string;
+}
+
 export class LuaFormatter {
     protected outputChannel: vscode.OutputChannel;
 
@@ -13,9 +17,12 @@ export class LuaFormatter {
     }
     public formatDocument(extensionDir: string, document: vscode.TextDocument, options: vscode.FormattingOptions, token: vscode.CancellationToken): Thenable<vscode.TextEdit[]> {
         var luaDir = path.join(extensionDir, "lua");
-        var luaExePath = path.join(luaDir, "bin", "lua5.1.exe");
-        var luaFormatterPath = path.join(luaDir, "luaformatter.lua");
-        return this.provideDocumentFormattingEdits(document, options, token, luaDir, `"${luaExePath}" "${luaFormatterPath}" -s 4 "${document.uri.fsPath}"`);
+        var luaFormatExePath = path.join(luaDir, "bin", "LuaFormat.exe");
+        
+        //var luaExePath = path.join(luaDir, "bin", "lua5.1.exe");
+        //var luaFormatterPath = path.join(luaDir, "luaformatter.lua");
+        //return this.provideDocumentFormattingEdits(document, options, token, luaDir, `"${luaExePath}" "${luaFormatterPath}" -s 4 "${document.uri.fsPath}"`);
+        return this.provideDocumentFormattingEdits(document, options, token, luaDir, `"${luaFormatExePath}" -i "${document.uri.fsPath}"`);
     }
 
     protected provideDocumentFormattingEdits(document: vscode.TextDocument, options: vscode.FormattingOptions, token: vscode.CancellationToken, cwd:string, cmdLine: string): Thenable<vscode.TextEdit[]> {
@@ -36,11 +43,19 @@ export class LuaFormatter {
                     if (document.getText() === formattedText) {
                         return resolve([]);
                     }
+                    
+                    let result: FormattedCode;
+                    try {
+                        result = JSON.parse(data);
+                    }
+                    catch (e) {
+                        // not json
+                        return resolve([]);
+                    }
 
                     var range = new vscode.Range(document.lineAt(0).range.start, document.lineAt(document.lineCount - 1).range.end)
-                    var txtEdit = new vscode.TextEdit(range, formattedText);
-                    resolve([txtEdit]);
-
+                    var textEdit = new vscode.TextEdit(range, result.Text);
+                    resolve([textEdit]);
                 }, errorMsg => {
                     vscode.window.showErrorMessage(`There was an error in formatting the document. View the Lua output window for details.`);
                     this.outputChannel.appendLine(errorMsg);
