@@ -54,7 +54,7 @@ export class LuaFormatter {
                     var textEdit = new vscode.TextEdit(range, result.Text);
                     resolve([textEdit]);
                 }, errorMsg => {
-                    vscode.window.showErrorMessage(`There was an error in formatting the document. View the Lua output window for details.`);
+                    vscode.window.showErrorMessage(errorMsg);
                     this.outputChannel.appendLine(errorMsg);
                     return resolve([]);
                 });
