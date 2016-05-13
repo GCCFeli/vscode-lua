@@ -2,7 +2,10 @@
 Lua language support in Visual Studio Code. For now, only code formatting is supported.
 
 If you run into any issues, please file a bug on [GitHub](https://github.com/GCCFeli/vscode-lua/issues).
-Only Windows is supported now. Linux/OSX support is coming soon. 
+Only Windows is supported now. Linux/OSX support is coming soon.
+
+#Requirements
+.Net Framework 4.5 or higher version 
 
 #Features
 * Code formatting
