@@ -16,13 +16,10 @@ export class LuaFormatter {
         this.outputChannel = outputChannel;
     }
     public formatDocument(extensionDir: string, document: vscode.TextDocument, options: vscode.FormattingOptions, token: vscode.CancellationToken): Thenable<vscode.TextEdit[]> {
-        var luaDir = path.join(extensionDir, "lua");
-        var luaFormatExePath = path.join(luaDir, "bin", "LuaFormat.exe");
+        var exeDir = path.join(extensionDir, "bin");
+        var luaFormatExePath = path.join(exeDir, "LuaFormat.exe");
         
-        //var luaExePath = path.join(luaDir, "bin", "lua5.1.exe");
-        //var luaFormatterPath = path.join(luaDir, "luaformatter.lua");
-        //return this.provideDocumentFormattingEdits(document, options, token, luaDir, `"${luaExePath}" "${luaFormatterPath}" -s 4 "${document.uri.fsPath}"`);
-        return this.provideDocumentFormattingEdits(document, options, token, luaDir, `"${luaFormatExePath}" -i "${document.uri.fsPath}"`);
+        return this.provideDocumentFormattingEdits(document, options, token, exeDir, `"${luaFormatExePath}" -i "${document.uri.fsPath}"`);
     }
 
     protected provideDocumentFormattingEdits(document: vscode.TextDocument, options: vscode.FormattingOptions, token: vscode.CancellationToken, cwd:string, cmdLine: string): Thenable<vscode.TextEdit[]> {
